@@ -240,7 +240,10 @@ export default function GraphEditor() {
     notes: true,
   });
 
- 
+  const handleToggleLayer = useCallback((layer: LayerName, visible: boolean) => {
+    setLayerVisibility((prev) => ({ ...prev, [layer]: visible }));
+    markDirty();
+  }, [markDirty]);
 
   const handlePrompt = useCallback((message: string, defaultValue: string, resolve: (value: string | null) => void) => {
     setInlinePrompt({ message, defaultValue, resolve });
@@ -260,14 +263,9 @@ export default function GraphEditor() {
     layerVisibility,
   }), [shapes, markers, symbols, photos, annotations, ftPerGrid, drawingLabel, showPhotos, companyLogo, inspectionData]);
 
- const markDirty = useCallback(() => {
-  setSaveState((prev) => (prev === "saving" ? prev : "dirty"));
-}, []);
-
-const handleToggleLayer = useCallback((layer: LayerName, visible: boolean) => {
-  setLayerVisibility((prev) => ({ ...prev, [layer]: visible }));
-  markDirty();
-}, [markDirty]);
+  const markDirty = useCallback(() => {
+    setSaveState((prev) => (prev === "saving" ? prev : "dirty"));
+  }, []);
 
   const hydrateDraft = useCallback((payload: DraftPayload) => {
     setShapes(payload.shapes ?? []);
