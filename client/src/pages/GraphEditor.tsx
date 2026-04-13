@@ -247,18 +247,30 @@ export default function GraphEditor() {
   }, []);
 
   const draftPayload = useMemo<DraftPayload>(() => ({
-    shapes,
-    markers,
-    symbols,
-    photos,
-    annotations,
-    ftPerGrid,
-    drawingLabel,
-    showPhotos,
-    companyLogo,
-    inspectionData,
-    layerVisibility,
-  }), [shapes, markers, symbols, photos, annotations, ftPerGrid, drawingLabel, showPhotos, companyLogo, inspectionData]);
+  shapes,
+  markers,
+  symbols,
+  photos,
+  annotations,
+  ftPerGrid,
+  drawingLabel,
+  showPhotos,
+  companyLogo,
+  inspectionData,
+  layerVisibility,
+}), [
+  shapes,
+  markers,
+  symbols,
+  photos,
+  annotations,
+  ftPerGrid,
+  drawingLabel,
+  showPhotos,
+  companyLogo,
+  inspectionData,
+  layerVisibility,
+]);
 
  const markDirty = useCallback(() => {
   setSaveState((prev) => (prev === "saving" ? prev : "dirty"));
